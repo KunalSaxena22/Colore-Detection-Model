@@ -1,40 +1,69 @@
 # Color Detection Model
 
-This Python project uses the OpenCV library to detect and identify colors in an image. It allows the user to double-click on any part of the image, and the program will display the name of the color along with its RGB values.
+A small Python/OpenCV desktop utility that lets you inspect an image and identify the nearest named color from the included RGB palette.
 
 ## Features
 
-- Load an image from the file system
-- Double-click on any part of the image to get the color name and RGB values
-- Display the color name, RGB values, and a rectangle filled with the detected color
-- Exit the program by pressing the 'a' key
+- Open a local image and double-click a pixel to sample its color.
+- Match the sampled RGB value to the closest entry in `colors.csv` using Manhattan RGB distance.
+- Display the matched color name and exact sampled RGB values.
+- Close the viewer with **Q**, **Esc**, or the window close button.
+- Validate image paths, image decoding, palette entries, and RGB channel values before opening the viewer.
 
 ## Requirements
 
-- Python 3.x
-- OpenCV (`cv2`)
-- Pandas (`pandas`)
+- Python 3.9 or newer.
+- OpenCV for Python.
+
+Install the dependency:
+
+~~~bash
+python -m pip install -r requirements.txt
+~~~
 
 ## Usage
 
-1. Clone the repository or download the source code.
-2. Install the required dependencies by running `pip install opencv-python pandas`.
-3. Place the `colors.csv` file in the same directory as the `color_detection.py` file.
-4. Run the `color_detection.py` script.
-5. Enter the path to the image file when prompted.
-6. Double-click on any part of the image to get the color name and RGB values.
-7. Press 'a' to exit the program.
+Run from the repository root and provide an image path:
 
-## File Structure
+~~~bash
+python color_detection.py path/to/image.jpg
+~~~
 
-- `color_detection.py`: The main Python script that runs the color detection program.
-- `colors.csv`: A CSV file containing color names and their corresponding RGB values.
-- `README.md`: This file, providing instructions and information about the project.
+You can also run the program without an image argument and enter the path when prompted:
 
-## Contributing
+~~~bash
+python color_detection.py
+~~~
 
-Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
+The default palette is the `colors.csv` file stored beside `color_detection.py`. To use another compatible six-column palette:
+
+~~~bash
+python color_detection.py path/to/image.jpg --colors path/to/colors.csv
+~~~
+
+The CSV columns are: color identifier, display name, hex value, red, green, and blue. RGB channel values must be integers from 0 through 255.
+
+## Tests
+
+The color matching and CSV validation helpers have unit tests using Python's standard library:
+
+~~~bash
+python -m unittest discover -s tests -v
+~~~
+
+These tests do not open an image window.
+
+## Project files
+
+- `color_detection.py`: image viewer, click handling, palette loading, and color matching.
+- `colors.csv`: named RGB color palette.
+- `requirements.txt`: Python runtime dependency.
+- `tests/test_color_detection.py`: unit tests for palette loading and matching.
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This repository currently does not include a `LICENSE` file. Contact the maintainer before redistributing or reusing the project.
+
+## Maintainer
+
+Kunal Saxena — [@KunalSaxena22](https://github.com/KunalSaxena22)
