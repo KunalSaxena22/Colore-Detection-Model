@@ -12,7 +12,7 @@ A small Python/OpenCV desktop utility that lets you inspect an image and identif
 
 ## Requirements
 
-- Python 3.9 or newer.
+- Python 3.10 or newer.
 - OpenCV for Python.
 
 Install the dependency:
